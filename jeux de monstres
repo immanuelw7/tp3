@@ -1,7 +1,12 @@
 import random
 jouer = True
 nbrdevie = 20
+nbrdevictoireconsecutif = 0
+statut = 'nulle'
 forcedumonstre = random.randint(1,5)
-
 print("Ahhhh fuzz, vous avez tombé sur un adversaire de niveau",forcedumonstre,"à vous dechoisir quoi faire:")
-
+def combat(level):
+    global nbrdevie, nbrdevictoireconsecutif,nbrdefaite, statut
+    nbrdefaite = 0
+    nbrdevictoireconsecutif = 0
+    forcedehéro = random.randint(1,10) + random.randint(1,10)
