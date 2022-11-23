@@ -50,11 +50,12 @@ while jouer:
             print(règle())
         elif choix == 4:
             jouer = False
+            print('byebey bruh')
             quit()
         elif choix == 5:
             print(nbrdevie)
-    restart = ('voulez vous recommencer o/n')
-    #if restart == 'o':
+    restart = input('voulez vous recommencer o/n')
+    print(statut())
     if restart == 'n':
         print('byebye')
         Jouer = False
