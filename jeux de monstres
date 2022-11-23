@@ -2,10 +2,10 @@ import random
 jouer = True
 nbrdevictoireconsecutif = 0
 statut = 'nulle'
+nbrdevictoire = 0
+nbrdefaite = 0
 def combat(level):
     global nbrdevictoire, nbrdevictoireconsecutif, nbrdefaite, statut, nbrdevie
-    nbrdevictoire = 0
-    nbrdefaite = 0
     forceduhéro = random.randint(1, 6) + random.randint(1, 6)
     print(f"Voici le resultat de votre lance de dés qui definit votre force à ce moment {forceduhéro}")
     if level < forceduhéro:
