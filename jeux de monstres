@@ -1,79 +1,60 @@
 import random
-def lol():
-    jouer = True
-    nbrdevictoireconsecutif = 0
-    statut = 'nulle'
+jouer = True
+nbrdevictoireconsecutif = 0
+statut = 'nulle'
+def combat(level):
+    global nbrdevictoire, nbrdevictoireconsecutif, nbrdefaite, statut, nbrdevie
+    nbrdevictoire = 0
+    nbrdefaite = 0
+    forceduhéro = random.randint(1, 6) + random.randint(1, 6)
+    print(f"Voici le resultat de votre lance de dés qui definit votre force à ce moment {forceduhéro}")
+    if level < forceduhéro:
+        nbrdevie += level
+        print(f'ezz dubs, vous avez WIN, votre niveau de vie est {nbrdevie}, votre nombre de victoire est {nbrdevictoireconsecutif}')
+        nbrdevictoire += 1
+        nbrdevictoireconsecutif += 1
+        statut = 'win'
+    else:
+        nbrdevie -= level
+        print(f'ah ripp, vous avez perdu, voici votre new nombre de vie{nbrdevie} et votre nombre de win {nbrdevictoireconsecutif}')
+        nbrdefaite += 1
+        nbrdevictoireconsecutif = 0
+        statut = 'défait'
 
+def fuir():
+    global nbrdevie
+    nbrdevie -= 1
+    print('Vous décider donc de fuir?!, bah sachez que vous perdez une vie')
+    return
 
-    def combat(level):
-        global nbrdevictoire, nbrdevictoireconsecutif, nbrdefaite, statut, nbrdevie
-        nbrdevictoire = 0
-        nbrdefaite = 0
-        forceduhéro = random.randint(1, 10) + random.randint(1, 10)
-        print(f"Voici le resultat de votre lance de dés qui definit votre force à ce moment {forceduhéro}")
-        if level < forceduhéro:
-            nbrdevie += level
-            print(
-                f'ezz dubs, vous avez WIN, votre niveau de vie est {nbrdevie}, votre nombre de victoire est {nbrdevictoireconsecutif}')
-            nbrdevictoire += 1
-            nbrdevictoireconsecutif += 1
-            statut = 'win'
-        else:
-            nbrdevie -= level
-            print(f'ah ripp, vous avez perdu, voici votre new nombre de vie{nbrdevie} et votre nombre de win {nbrdevictoireconsecutif}')
-            nbrdefaite += 1
-            nbrdevictoireconsecutif = 0
-            statut = 'défait'
+def règle():
+    return 'Pour réussir un combat, il faut que la valeur du dé lancé soit supérieure à la force de l’adversaire. Dans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire.Une défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.  Dans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire.La partie se termine lorsque les points de vie de l’usager tombent sous 0.L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie'
 
-
-    def fuir():
-        global nbrdevie
-        nbrdevie -= 1
-        return print('Vous décider donc de fuir?!, bah sachez que vous perdez une vie')
-
-
-    def règle():
-        return 'Pour réussir un combat, il faut que la valeur du dé lancé soit supérieure à la force de l’adversaire. Dans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire.Une défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.  Dans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire.La partie se termine lorsque les points de vie de l’usager tombent sous 0.L’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie'
-
-
-    def fin():
-        print(f'GG, votre nombre de combat total est {nbrdecombat}, votre nombre de win de suite est {nbrdevictoireconsecutif}')
-
-
-    while jouer:
-        nbrdevie = 2
-        nbrdecombat = 0
-        while nbrdevie >= 1:
-            level = random.randint(1, 5)
-            try:
-                choix = int(input(f"Ahhhh fuzz, vous avez tombé sur un adversaire de niveau: {level}, à vous dechoisir quoi faire:'1) Combattre \n 2) Fuir \n 3)Afficher les règles \n 4)Quitter \n 5)voir nombre de vie  ")
-
-
-
-            if nbrdevictoireconsecutif == 3:
-                boss = int(input('vous tombez dans un room avec le monstre boss car vous avez 3 win de suite'))
-                combat(random.randint(7,17))
-            elif choix == 1:
-
-
-
-
-                nbrdecombat += 1
+def fin():
+    return print(f"GG, votre nombre de combat total est {nbrdecombat}, votre nombre de win de suite est {nbrdevictoireconsecutif}")
+while jouer:
+    nbrdevie = 2
+    nbrdecombat = 0
+    while nbrdevie >= 1:
+        level = random.randint(1,12)
+        choix = int(input(f"Ahhhh fuzz, vous avez tombé sur un adversaire de niveau: {level}, à vous de choisir quoi faire:'\n 1)Combattre \n 2)Fuir \n 3)Afficher les règles \n 4)Quitter \n 5)voir nombre de vie \n : "))
+        if nbrdevictoireconsecutif > 2:
+            boss = input('vous tombez dans un room avec le monstre boss car vous avez 3 win de suite')
+            combat(random.randint(10,20))
+        elif choix == 1:
+            nbrdecombat += 1
             combat(level)
-            elif choix == 2:
-                fuir()
-            elif choix == 3:
-                print(règle())
-            elif choix == 4:
-                jouer = False
-                quit()
-            elif choix == 5:
-                print(nbrdevie)
-            restart = ('voulez vous recommencer o/n')
-            if restart == 'o':
-                lol()
-            if restart == 'n':
-                print('byebye')
-                Jouer = False
-
-
+        elif choix == 2:
+            fuir()
+        elif choix == 3:
+            print(règle())
+        elif choix == 4:
+            jouer = False
+            quit()
+        elif choix == 5:
+            print(nbrdevie)
+    restart = ('voulez vous recommencer o/n')
+    #if restart == 'o':
+    if restart == 'n':
+        print('byebye')
+        Jouer = False
